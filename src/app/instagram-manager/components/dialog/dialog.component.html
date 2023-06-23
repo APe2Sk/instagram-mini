@@ -1,0 +1,31 @@
+<mat-spinner *ngIf="isLoadingImage"></mat-spinner>
+
+
+<div class="dialog-main-container" *ngIf="!isLoadingImage">
+    
+    <div class="dialog-upper-part">
+        <h2 mat-dialog-title>User XYZ</h2>
+        <div mat-dialog-actions class="close-button">
+            <button mat-button mat-dialog-close>X</button>
+        </div>
+    </div>
+
+
+    <div mat-dialog-content>
+        <img mat-card-image src={{userPost.url}} alt="User photo" class="photo">
+
+        <div class="details-part">
+            <p class="title">{{userPost.title}}</p>
+
+            <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon class="more-options">more_vert</mat-icon>                
+            </button>
+                <mat-menu #menu="matMenu">
+                <button mat-menu-item>Edit</button>
+                <button mat-button color="warn">Delete post</button>
+            </mat-menu>
+        </div>
+    </div>
+    
+
+</div>

@@ -1,0 +1,20 @@
+
+<mat-drawer-container class="app-sidenav-container">
+    <mat-drawer mode="side" opened class="app-sidenav">
+
+        <!-- new -->
+        <input type="text" [(ngModel)]="inputValue" type="text" placeholder="Search">
+        <button (click)="onInputValueChange()">Submit</button>
+        <p>{{inputValue}}</p>
+    </mat-drawer>
+    <mat-drawer-content class="app-sidenav-content-container">
+        <div class="app-toolbar">
+            <app-toolbar></app-toolbar>
+        </div>
+
+        <div class="app-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+  

@@ -1,0 +1,13 @@
+<div class="main-content-container">
+    <mat-card cols="2" rowHeight="2:1" *ngFor="let post of userPosts" class="card-content" 
+        (click)="openDialog(post.id)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+        <img mat-card-image [src]="post.thumbnailUrl" class="image-content">
+
+        <mat-card-content class="individual-content-container">
+            <p>
+                {{post.title}}
+            </p>
+        </mat-card-content>
+
+    </mat-card>
+</div>

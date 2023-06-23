@@ -1,0 +1,27 @@
+p {
+    font-size: 1.2rem;
+}
+
+.dialog-upper-part {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    padding: 0px;
+}
+
+.close-button{
+    position: end;
+}
+
+
+.details-part {
+    display: flex;
+    justify-content: space-between;
+}
+
+.more-options:hover {
+    background: rgba(186, 186, 186, 0.6);
+    backdrop-filter: blur(80px);
+  
+    cursor: pointer;
+  }
