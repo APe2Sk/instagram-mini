@@ -6,26 +6,21 @@ import { DialogComponent } from '../dialog/dialog.component';
 import {MatCardModule} from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { FilterService } from 'src/app/Services/filter.service';
+import { Observable, switchMap } from 'rxjs';
 
 
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
-  styleUrls: ['./main-content.component.css'],
-  standalone: true,
-  imports: [MatCardModule, CommonModule],
-  
+  styleUrls: ['./main-content.component.css']
 })
 
 
 export class MainContentComponent implements OnInit {
 
-  urlUserPosts: string = 'https://jsonplaceholder.typicode.com/photos';
 
   userPosts: PhotoPostInterface[] = [];
   isHovered: boolean = false;
-  //new
-  // filteredItems: PhotoPostInterface[] = this.userPosts.slice();
   inputValue: string = '';
   
 
@@ -35,12 +30,27 @@ export class MainContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
+    this.filterService.getSearch().pipe(
+      switchMap((searchTitle) => {
+        return this.dataService.getPostsByTitle(searchTitle);
+    })).subscribe((userPhotos) => {
+      this.userPosts = userPhotos;
+    })
+
   }  
 
   getData(): void {
-    this.dataService.getUserPosts(this.urlUserPosts).subscribe((response: PhotoPostInterface[]) => {
+    this.dataService.getUserPosts().subscribe((response: PhotoPostInterface[]) => {
     this.userPosts = response.slice(0, 15);
   });
+  }
+
+
+  getDataFromSearch(title: string) {
+    this.dataService.getPostsByTitle(title).subscribe((response) => {
+      this.userPosts = response;
+    })
   }
 
   // onClickElement(cardId: number): void {

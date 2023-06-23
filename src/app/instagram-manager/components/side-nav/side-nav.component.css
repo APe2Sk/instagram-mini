@@ -1,11 +1,14 @@
-/* .app-sidenav-container {
-    flex: 1;
+ .app-sidenav-container {
     width: 100%;
     min-width: 100%;
     height: 100%;
     min-height: 100%;
   }
-  
+
+  .app-toolbar {
+    background-color: gray;
+  }
+/*  
   .app-sidenav {
     width: 240px;
     height: 100%;
@@ -19,37 +22,21 @@
   }
 
    */
-
-
-   .app-sidenav-container {
-    height: 100vh; /* Set the container height to fill the viewport */
-    display: flex; /* Use flexbox for layout */
-
+   .example-form {
+    display: flex;
+    width: 20%;
+    justify-content: center;
   }
   
-  .app-sidenav {
-    width: 200px; /* Set the width of the side navigation */
-    background-color: #f0f0f0; /* Customize the background color */
+  .input-container {
+    margin: 20px 20px;
   }
   
-  .app-sidenav-content-container {
-    flex: 1; /* Allow the content to expand and fill the remaining space */
-    overflow: auto; /* Enable scrolling if content exceeds the available space */
-  }
-  
-  .app-toolbar {
-    height: 60px; /* Set the height of the toolbar */
-    background-color: #f0f0f0; /* Customize the background color */
-    padding: 10px; /* Add padding to the toolbar */
+
+  .example-full-width {
     width: 100%;
-    height: 7%;
-    position: fixed;
-    z-index: 1;
   }
   
-  .app-content {
-    margin-top: 7%; /* Add some margin to separate the content from the toolbar */
-  }
   
 /* 
   new

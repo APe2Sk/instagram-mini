@@ -11,6 +11,7 @@ import { DataService } from './Services/data.service';
 import { FlexLayoutModule } from '@angular/flex-layout'; 
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FilterService } from './Services/filter.service';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
     FlexLayoutModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [DataService],
+  providers: [DataService, FilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

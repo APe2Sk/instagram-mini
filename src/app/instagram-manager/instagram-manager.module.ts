@@ -19,6 +19,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+
 
 const routes: Routes = [
   {path: '', component: InstagramAppComponent,
@@ -34,20 +38,23 @@ const routes: Routes = [
     InstagramAppComponent,
     ToolbarComponent,
     SideNavComponent,
+    MainContentComponent,
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
     RouterModule.forChild(routes),  
+    ReactiveFormsModule,
     MatSidenavModule,
     MatGridListModule,
     MatCardModule,
     MatFormFieldModule,
+    MatInputModule,
     MatToolbarModule,
     MatDialogModule, 
     MatButtonModule,
-    MainContentComponent,
     DialogComponent,
+    MatIconModule,
     MatProgressSpinnerModule,
     FormsModule
   ]

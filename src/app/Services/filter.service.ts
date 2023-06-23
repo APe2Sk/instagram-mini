@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
-  inputValue: string ='';
 
-  setInputValue(value: string) {
-    this.inputValue = value;
-    console.log(this.inputValue)
+  private searchSubject = new Subject<string>();
+
+  getSearchSubject(): Subject<string> {
+    return this.searchSubject;
   }
 
-  getInputValue() {
-    return this.inputValue;
+  getSearch(): Observable<string> {
+    return this.searchSubject.asObservable();
   }
+  
+  
+  searchTitle(searchKey: string): void {
+    this.searchSubject.next(searchKey);
+  }
+  
+
 
 }
