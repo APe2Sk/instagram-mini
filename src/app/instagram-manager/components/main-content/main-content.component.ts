@@ -2,11 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PhotoPostInterface } from 'src/app/Interfaces/photo-posts-interface';
 import { DataService } from 'src/app/Services/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
 import {MatCardModule} from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { FilterService } from 'src/app/Services/filter.service';
 import { Observable, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { DialogComponent } from '../dialog/dialog.component';
 
 
 @Component({
@@ -24,7 +26,8 @@ export class MainContentComponent implements OnInit {
   inputValue: string = '';
   
 
-  constructor(private dataService: DataService, public dialog: MatDialog, private filterService: FilterService) {
+  constructor(private dataService: DataService, public dialog: MatDialog, private filterService: FilterService, 
+    private router: Router, private location: Location) {
     
   }
 
@@ -66,7 +69,10 @@ export class MainContentComponent implements OnInit {
   }
 
   openDialog(cardId: number) {
-    this.dialog.open(DialogComponent, {data: cardId});
+    this.location.replaceState(`photos/${cardId}`)
+    this.dialog.open(DialogComponent, {data: {photoId: cardId}}).afterClosed().subscribe(() => {
+      this.location.replaceState(`photos`)
+    });
     console.log("in main:", cardId);
   }
 
