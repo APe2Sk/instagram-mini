@@ -7,7 +7,8 @@ import {MatCardModule} from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { FilterService } from 'src/app/Services/filter.service';
 import { Observable, switchMap } from 'rxjs';
-
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-main-content',
@@ -24,7 +25,8 @@ export class MainContentComponent implements OnInit {
   inputValue: string = '';
   
 
-  constructor(private dataService: DataService, public dialog: MatDialog, private filterService: FilterService) {
+  constructor(private dataService: DataService, public dialog: MatDialog, private filterService: FilterService, 
+    private location: Location) {
     
   }
 
@@ -66,8 +68,10 @@ export class MainContentComponent implements OnInit {
   }
 
   openDialog(cardId: number) {
-    this.dialog.open(DialogComponent, {data: cardId});
-    console.log("in main:", cardId);
+    this.location.replaceState(`photos/${cardId}`)
+    this.dialog.open(DialogComponent, {data: {photoId: cardId}}).afterClosed().subscribe(() => {
+      this.location.replaceState(`photos`)
+    });
   }
 
 

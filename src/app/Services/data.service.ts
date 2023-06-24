@@ -25,8 +25,9 @@ export class DataService {
     return this.http.get<PhotoPostInterface[]>(this.url, { params });
   }
 
-  getUserPostsById(url: string, id: number) : any {
-    return this.http.get(url+'/'+id);
+
+  getUserPostsById(id: number) : Observable<PhotoPostInterface> {
+    return this.http.get<PhotoPostInterface>(`${this.url}/${id}`);
   }
 
 
