@@ -22,12 +22,14 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { PhotoDetailsComponent } from './components/photo-detais/photo-details.component';
 
 
 const routes: Routes = [
   {path: '', component: InstagramAppComponent,
     children: [
-      {path: '', component: MainContentComponent}
+      {path: '', component: MainContentComponent},
+      { path: ':id', component: PhotoDetailsComponent },
     ]
   },
   {path: '**', redirectTo: ''}
@@ -39,6 +41,7 @@ const routes: Routes = [
     ToolbarComponent,
     SideNavComponent,
     MainContentComponent,
+    PhotoDetailsComponent
   ],
   imports: [
     CommonModule,

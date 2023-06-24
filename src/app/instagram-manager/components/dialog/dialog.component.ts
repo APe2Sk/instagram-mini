@@ -20,21 +20,21 @@ import {MatButtonModule} from '@angular/material/button';
 })
 
 export class DialogComponent {
-
-  urlUserPosts: string = 'https://jsonplaceholder.typicode.com/photos';
   userPost!: PhotoPostInterface;
   isLoadingImage: boolean = true;
   imgUrl: string = '';
 
 
-  constructor(private dataService: DataService, @Inject(MAT_DIALOG_DATA) public data: number) {}
+  constructor(private dataService: DataService, @Inject(MAT_DIALOG_DATA) public data: {
+    photoId: number
+  }) {}
 
   ngOnInit(): void {
     this.getData();
   } 
 
   getData(): void {
-    this.dataService.getUserPostsById(this.urlUserPosts, this.data).subscribe((response: PhotoPostInterface) => {
+    this.dataService.getUserPostsById(this.data.photoId).subscribe((response: PhotoPostInterface) => {
       this.userPost = response;
       console.log("in dialog", this.userPost.id);
       this.imgUrl = this.userPost.url;

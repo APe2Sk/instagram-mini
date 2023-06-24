@@ -4,6 +4,7 @@ import { debounceTime } from 'rxjs';
 import { FilterService } from 'src/app/Services/filter.service';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -16,7 +17,7 @@ export class SideNavComponent implements OnInit {
   searchControl: FormControl = new FormControl('');
 
 
-  constructor(private filterService: FilterService) {
+  constructor(private filterService: FilterService, private router: Router) {
   }
 
   ngOnInit() {
@@ -24,5 +25,9 @@ export class SideNavComponent implements OnInit {
       console.log(value);
       this.filterService.searchTitle(value);    
     });
+  }
+
+  onHomeClick() {
+    this.router.navigate(['']);
   }
 }
