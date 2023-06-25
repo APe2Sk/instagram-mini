@@ -1,3 +1,5 @@
+<div class="ss"  (scroll)="onScroll($event)">
+    
 <div class="main-content-container">
     <mat-card cols="2" rowHeight="2:1" *ngFor="let post of userPosts" class="card-content" 
         (click)="openDialog(post.id)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
@@ -10,4 +12,17 @@
         </mat-card-content>
 
     </mat-card>
+
+
+    <div class="spinner">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </div>
+
+
+    <div *ngIf="userPosts.length === 0">
+            No content
+    </div>
+</div>
+
+
 </div>

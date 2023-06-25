@@ -9,13 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './Services/data.service';
 
 import { FlexLayoutModule } from '@angular/flex-layout'; 
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { FilterService } from './Services/filter.service';
 
 const routes: Routes = [
-  {path: 'instagrammanager', loadChildren: () => import('./instagram-manager/instagram-manager.module').then(m => m.InstagramManagerModule)},
-  {path: '**', redirectTo: 'instagrammanager'}
+  {path: 'photos', loadChildren: () => import('./instagram-manager/instagram-manager.module').then(m => m.InstagramManagerModule)},
+  {path: '**', redirectTo: 'photos'}
 ];
 
 @NgModule({
@@ -29,7 +27,7 @@ const routes: Routes = [
     FlexLayoutModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [DataService],
+  providers: [DataService, FilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

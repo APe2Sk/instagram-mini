@@ -1,20 +1,34 @@
-
 <mat-drawer-container class="app-sidenav-container">
-    <mat-drawer mode="side" opened class="app-sidenav">
+    <mat-drawer mode="side" opened class="example-form" disableClose>
 
-        <!-- new -->
-        <input type="text" [(ngModel)]="inputValue" type="text" placeholder="Search">
-        <button (click)="onInputValueChange()">Submit</button>
-        <p>{{inputValue}}</p>
-    </mat-drawer>
-    <mat-drawer-content class="app-sidenav-content-container">
-        <div class="app-toolbar">
-            <app-toolbar></app-toolbar>
+        <!-- <input matInput [formControl]="searchControl" placeholder="Search"> -->
+        <div class="input-container">
+            <button class="ch" mat-flat-button style="width: 100%;" (click)="onHomeClick()">
+                <mat-icon>home</mat-icon>
+                Home
+            </button>
         </div>
+        <div class="input-container">
+            <button class="ch" mat-flat-button style="width: 100%;" (click)="createNewPost()">
+                <mat-icon>add</mat-icon>
+                Create
+            </button>
+        </div>
+        <div class="input-container">
+            <mat-form-field class="example-full-width">
+                <mat-label>Search</mat-label>
+                <input matInput [formControl]="searchControl" placeholder="Search">
+            </mat-form-field>
+        </div>
+    </mat-drawer>
+
+    <mat-drawer-content class="app-sidenav-content-container">
+        <!-- <div class="app-toolbar">
+            <app-toolbar></app-toolbar>
+        </div> -->
 
         <div class="app-content">
             <router-outlet></router-outlet>
         </div>
     </mat-drawer-content>
 </mat-drawer-container>
-  
