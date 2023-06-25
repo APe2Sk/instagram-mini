@@ -5,6 +5,8 @@ import { FilterService } from 'src/app/Services/filter.service';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import { AddComponent } from '../add/add.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-side-nav',
@@ -17,7 +19,7 @@ export class SideNavComponent implements OnInit {
   searchControl: FormControl = new FormControl('');
 
 
-  constructor(private filterService: FilterService, private router: Router) {
+  constructor(private filterService: FilterService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -29,5 +31,9 @@ export class SideNavComponent implements OnInit {
 
   onHomeClick() {
     this.router.navigate(['']);
+  }
+
+  createNewPost() {
+    this.dialog.open(AddComponent);
   }
 }

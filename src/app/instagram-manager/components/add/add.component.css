@@ -1,0 +1,76 @@
+.uploadedImage{
+    max-width: 40%;
+}
+
+.upload-dialog {
+    display: flex;
+    flex-direction: row;
+}
+
+.details-container {
+    margin-left: 10px;
+}
+
+/* .image-upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.upload-dialog{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+} */
+
+.dd {
+    display: flex;
+    flex-direction: row;
+}
+
+.upload-dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .drop-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    width: 600px;
+    height: 600px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .drop-area p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .drop-area img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .details-container {
+    width: 300px;
+    padding: 20px;
+  }
+  
+  .details {
+    margin-top: 20px;
+  }
+
+  .details button {
+    margin: 10px;
+  }
+  
+  
