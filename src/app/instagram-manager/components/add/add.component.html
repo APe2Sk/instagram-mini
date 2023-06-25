@@ -1,0 +1,68 @@
+<!-- <form (ngSubmit)="submitForm()">
+    <div class="upload-dialog">
+
+        <div class="image-upload-container">
+            <img *ngIf="selectedImage" [src]="selectedImage" alt="Uploaded Image" class="uploadedImage" />
+
+            <label for="imageUpload">Upload Image:</label>
+            <input type="file" id="imageUpload" (change)="onImageSelected($event)" accept="image/*" />
+          </div>
+          
+          <div class="details-container">
+            <label for="title">Title:</label>
+            <textarea id="title" [(ngModel)]="title" name="title"></textarea>
+          </div>
+          
+    </div>
+    <button type="submit">Submit</button>
+    
+</form> -->
+
+
+<form (ngSubmit)="submitForm()" class="upload-dialog">
+
+  <!-- <div class="image-upload-container">
+    <img *ngIf="selectedImage" [src]="selectedImage" alt="Uploaded Image" class="uploadedImage" />
+
+    <label for="imageUpload">Upload Image:</label>
+    <input type="file" id="imageUpload" (change)="onImageSelected($event)" accept="image/*" />
+  </div> -->
+<div class="dd">
+  <div class="drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+    <p *ngIf="selectedImage === null">Drag and drop your image here</p>
+    <img *ngIf="selectedImage" [src]="selectedImage" alt="Dropped Image">
+  </div>
+  
+
+  <mat-divider [vertical]="true"></mat-divider>
+
+  <!-- <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+  <div>
+    <mat-form-field class="details-container">
+      <mat-label for="title">Title:</mat-label>
+      <textarea matInput id="title" [(ngModel)]="title" name="title"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Album</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let album of albums" [value]="album.id">
+          {{album.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+</div>
+  <div class="details">
+    <button type="submit" mat-raised-button color="primary">Submit</button>  
+    <button mat-raised-button>Cancel</button>  
+  </div>
+  
+  
+</form>

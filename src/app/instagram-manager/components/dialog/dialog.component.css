@@ -25,3 +25,24 @@ p {
   
     cursor: pointer;
   }
+
+  .example-card {
+    /* max-width: 400px; */
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .example-header-image {
+    background-image: url('\src\assets\avatar.png');
+    background-size: cover;
+  }
+  
+  .card-image {
+    margin-top: 15px;
+  }
+
+  .details-container{
+    display: flex;
+    justify-content: space-between;
+  }

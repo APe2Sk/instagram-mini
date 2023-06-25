@@ -1,4 +1,3 @@
-
 <mat-drawer-container class="app-sidenav-container">
     <mat-drawer mode="side" opened class="example-form" disableClose>
 
@@ -7,16 +6,22 @@
             <button class="ch" mat-flat-button style="width: 100%;" (click)="onHomeClick()">
                 <mat-icon>home</mat-icon>
                 Home
-              </button>
-          </div>
+            </button>
+        </div>
+        <div class="input-container">
+            <button class="ch" mat-flat-button style="width: 100%;" (click)="createNewPost()">
+                <mat-icon>add</mat-icon>
+                Create
+            </button>
+        </div>
         <div class="input-container">
             <mat-form-field class="example-full-width">
-              <mat-label>Search</mat-label>
-              <input matInput [formControl]="searchControl" placeholder="Search">
+                <mat-label>Search</mat-label>
+                <input matInput [formControl]="searchControl" placeholder="Search">
             </mat-form-field>
-          </div>
-
+        </div>
     </mat-drawer>
+
     <mat-drawer-content class="app-sidenav-content-container">
         <!-- <div class="app-toolbar">
             <app-toolbar></app-toolbar>
@@ -27,4 +32,3 @@
         </div>
     </mat-drawer-content>
 </mat-drawer-container>
-  

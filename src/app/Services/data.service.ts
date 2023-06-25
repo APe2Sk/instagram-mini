@@ -8,35 +8,50 @@ import { Observable } from 'rxjs';
 })
 
 export class DataService {
-  
+
   private url: string = 'https://jsonplaceholder.typicode.com/photos';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getUserPosts() : Observable<PhotoPostInterface[]> {
+  getUserPosts(): Observable<PhotoPostInterface[]> {
     return this.http.get<PhotoPostInterface[]>(this.url);
   }
 
-  getPostsByTitle(title: string) : Observable<PhotoPostInterface[]> {
+  getRangeUserPosts(start: number, limit: number): Observable<PhotoPostInterface[]> {
+    const params = new HttpParams()
+      .set('_start', start)
+      .set('_limit', limit);
+
+    return this.http.get<PhotoPostInterface[]>(this.url, { params });
+  }
+
+  getPostsByTitle(title: string, start: number, limit: number): Observable<PhotoPostInterface[]> {
     const params = new HttpParams()
       .set('title_like', title)
-      .set('_limit', 10);
-      
+      .set('_start', start)
+      .set('_limit', limit);
+
     return this.http.get<PhotoPostInterface[]>(this.url, { params });
   }
 
 
-  getUserPostsById(id: number) : Observable<PhotoPostInterface> {
+  getUserPostsById(id: number): Observable<PhotoPostInterface> {
+
     return this.http.get<PhotoPostInterface>(`${this.url}/${id}`);
+  }
+
+  deletePost(id: number): Observable<void>{
+    // console.log("deleted item with ID:", id);
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 
 
   // nov kod
 
-  
+
   // getData(startIndex: number, count: number, apiUrl: string) {
   //   const url = `${apiUrl}?startIndex=${startIndex}&count=${count}`;
   //   return this.http.get(url);
   // }
-  
+
 }

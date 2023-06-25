@@ -23,6 +23,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { PhotoDetailsComponent } from './components/photo-detais/photo-details.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { AddComponent } from './components/add/add.component';
+import { EditComponent } from './components/edit/edit.component';
+import { DeleteComponent } from './components/delete/delete.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 const routes: Routes = [
@@ -41,7 +48,11 @@ const routes: Routes = [
     ToolbarComponent,
     SideNavComponent,
     MainContentComponent,
-    PhotoDetailsComponent
+    PhotoDetailsComponent,
+    DialogComponent,
+    AddComponent,
+    EditComponent,
+    DeleteComponent
   ],
   imports: [
     CommonModule,
@@ -56,10 +67,13 @@ const routes: Routes = [
     MatToolbarModule,
     MatDialogModule, 
     MatButtonModule,
-    DialogComponent,
     MatIconModule,
     MatProgressSpinnerModule,
-    FormsModule
+    FormsModule,
+    ScrollingModule,
+    MatDividerModule,
+    MatMenuModule,
+    MatSelectModule
   ]
 })
 export class InstagramManagerModule { }
