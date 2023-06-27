@@ -11,10 +11,11 @@ import {MatButtonModule} from '@angular/material/button';
 import { AlbumService } from 'src/app/Services/album.service';
 import { AlbumExtendedInterface } from 'src/app/Interfaces/album-extended-interface';
 import { UserInterface } from 'src/app/Interfaces/user-interface';
-import { concatMap, map } from 'rxjs';
+import { concatMap, filter, map } from 'rxjs';
 import { EditComponent } from '../edit/edit.component';
 import { PhotoAction } from '../../enums/photo-action-enum';
 import { DeleteComponent } from '../delete/delete.component';
+import { AddComponent } from '../add/add.component';
 
 
 @Component({
@@ -24,13 +25,13 @@ import { DeleteComponent } from '../delete/delete.component';
 })
 
 export class DialogComponent {
-  userPost!: PhotoPostInterface;
+  userPost!: PhotoPostInterface ;
   isLoadingImage: boolean = true;
   imgUrl: string = '';
   userAlbum!: AlbumExtendedInterface;
 
   constructor(private dialogRef: MatDialogRef<DialogComponent>, private dataService: DataService, private albumService: AlbumService, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: {
-    photoId: number
+    newCardsArr: PhotoPostInterface
   }) {}
 
   ngOnInit(): void {
@@ -38,21 +39,44 @@ export class DialogComponent {
   } 
 
   getData(): void {
-    this.dataService.getUserPostsById(this.data.photoId)
-      .pipe(concatMap((response) => {
-        this.userPost = response;
-        // console.log("in dialog", this.userPost.id);
-        this.imgUrl = this.userPost.url;
-        return this.albumService.getAlbumById(response.albumId)
-      })).subscribe((album) => {
-        this.userAlbum = album;
-        this.isLoadingImage = false;
-      });
+    this.userPost = this.data.newCardsArr;
+    console.log("in method", this.userPost);
+    // if (this.user)
+    this.albumService.getAlbumById(this.userPost.albumId).subscribe((album) => {
+      this.userAlbum = album;
+      this.isLoadingImage = false;
+    });
+
+    // this.dataService.getUserPostsById(this.data.photoId)
+    //   .pipe(concatMap((response) => {
+    //     this.userPost = response;
+    //     // console.log("in dialog", this.userPost.id);
+    //     this.imgUrl = this.userPost.url;
+    //     return this.albumService.getAlbumById(response.albumId)
+    //   })).subscribe((album) => {
+    //     this.userAlbum = album;
+    //     this.isLoadingImage = false;
+    //   });
   }
 
   openAddDialog() {
-    this.dialog.open(EditComponent);
+    this.dialog.open(AddComponent);
   }
+
+  openEditDialog() {
+    console.log(this.userPost);
+    const dialogRef = this.dialog.open(AddComponent, { data: { photoToEdit: this.userPost } });
+    dialogRef.afterClosed().pipe(
+      filter((value) => value !== undefined), 
+      concatMap((editedPhoto) => {
+      this.userPost = editedPhoto;
+      console.log(this.userPost);
+      return this.albumService.getAlbumById(this.userPost.albumId);
+    })).subscribe((album) => {
+      this.userAlbum = album;
+    });
+  }
+  
 
   deleteData() {
     this.isLoadingImage = true;

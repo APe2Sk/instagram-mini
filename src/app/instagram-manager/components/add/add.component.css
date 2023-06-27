@@ -44,11 +44,15 @@
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
   
   .drop-area p {
     margin: 0;
     padding: 0;
+
   }
   
   .drop-area img {
@@ -63,6 +67,9 @@
   .details-container {
     width: 300px;
     padding: 20px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-around; */
   }
   
   .details {
@@ -72,5 +79,47 @@
   .details button {
     margin: 10px;
   }
+
   
-  
+  .clear-button {
+    background-color: white;
+    border: 2px solid rgb(189, 189, 189);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .clear-button:hover {
+    background: rgb(189, 189, 189);
+  }
+
+  .clear-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .add-image{
+    display: block;
+  }
+
+  .upload-image-label{
+    display: inline-block;
+    background-color: #f2f2f2;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    font-weight: bold;
+
+  }
+
+  .title-field{
+    width: 100%;
+  }
+
+  .album-field{
+    width: 100%;
+  }

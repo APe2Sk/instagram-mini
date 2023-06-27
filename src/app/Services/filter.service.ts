@@ -20,7 +20,5 @@ export class FilterService {
   searchTitle(searchKey: string): void {
     this.searchSubject.next(searchKey);
   }
-  
-
 
 }
