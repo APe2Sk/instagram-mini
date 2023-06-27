@@ -30,7 +30,11 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import {MatSelectModule} from '@angular/material/select';
-
+import { DataService } from '../Services/data.service';
+import {
+  MatSnackBar,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 
 const routes: Routes = [
   {path: '', component: InstagramAppComponent,
@@ -52,7 +56,7 @@ const routes: Routes = [
     DialogComponent,
     AddComponent,
     EditComponent,
-    DeleteComponent
+    DeleteComponent,
   ],
   imports: [
     CommonModule,
@@ -73,7 +77,8 @@ const routes: Routes = [
     ScrollingModule,
     MatDividerModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ]
 })
 export class InstagramManagerModule { }

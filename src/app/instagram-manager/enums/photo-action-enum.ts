@@ -1,4 +1,5 @@
 export enum PhotoAction {
     EDIT,
-    DELETE
+    DELETE,
+    ADD
   }

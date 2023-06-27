@@ -40,7 +40,10 @@
     </mat-card-header>
     <mat-divider></mat-divider>
 
-    <img class="card-image" mat-card-image src={{userPost.url}} alt="">
+    <div class="image">
+      <img class="card-image" mat-card-image src={{userPost.url}} alt="">
+
+    </div>
     <mat-card-content class="details-container">
       <p class="photo-title">
         {{userPost.title}}
@@ -50,7 +53,7 @@
           <mat-icon class="more-options">more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openAddDialog()">Edit</button>
+          <button mat-menu-item (click)="openEditDialog()">Edit</button>
 
           <button mat-button color="warn" (click)="openDeleteConfirmationDialog()">Delete</button>
         </mat-menu>

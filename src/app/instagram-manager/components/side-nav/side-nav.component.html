@@ -1,25 +1,33 @@
 <mat-drawer-container class="app-sidenav-container">
+
     <mat-drawer mode="side" opened class="example-form" disableClose>
 
-        <!-- <input matInput [formControl]="searchControl" placeholder="Search"> -->
-        <div class="input-container">
-            <button class="ch" mat-flat-button style="width: 100%;" (click)="onHomeClick()">
-                <mat-icon>home</mat-icon>
-                Home
-            </button>
+        <div class="container">
+            <div class="input-container">
+                <img src="../../../../assets/logo.png" alt="appLogo" class="app-logo" (click)="onHomeClick()">
+
+            </div>
+            <!-- <input matInput [formControl]="searchControl" placeholder="Search"> -->
+            <div class="input-container">
+                <button class="ch" mat-flat-button style="width: 100%;" (click)="onHomeClick()">
+                    <mat-icon>home</mat-icon>
+                    Home
+                </button>
+            </div>
+            <div class="input-container">
+                <button class="ch" mat-flat-button style="width: 100%;" (click)="createNewPost()">
+                    <mat-icon>add</mat-icon>
+                    Create
+                </button>
+            </div>
+            <div class="input-container">
+                <mat-form-field class="seach-field">
+                    <mat-label>Search</mat-label>
+                    <input matInput [formControl]="searchControl" >
+                </mat-form-field>
+            </div>
         </div>
-        <div class="input-container">
-            <button class="ch" mat-flat-button style="width: 100%;" (click)="createNewPost()">
-                <mat-icon>add</mat-icon>
-                Create
-            </button>
-        </div>
-        <div class="input-container">
-            <mat-form-field class="example-full-width">
-                <mat-label>Search</mat-label>
-                <input matInput [formControl]="searchControl" placeholder="Search">
-            </mat-form-field>
-        </div>
+
     </mat-drawer>
 
     <mat-drawer-content class="app-sidenav-content-container">

@@ -38,8 +38,10 @@ p {
     background-size: cover;
   }
   
+  
   .card-image {
     margin-top: 15px;
+    max-height: 600px;
   }
 
   .details-container{

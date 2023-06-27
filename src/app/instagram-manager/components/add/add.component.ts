@@ -1,20 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AlbumInterface } from 'src/app/Interfaces/album-interface';
+import { PhotoPostInterface } from 'src/app/Interfaces/photo-posts-interface';
 import { AlbumService } from 'src/app/Services/album.service';
+import { DataService } from 'src/app/Services/data.service';
+import { PhotoAction } from '../../enums/photo-action-enum';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css']
+  styleUrls: ['./add.component.css'],
 })
 export class AddComponent implements OnInit {
 
   selectedImage: string | ArrayBuffer | null = null;
-  title: string = '';
   albums: AlbumInterface[] = [];
+  isLoadingImage: boolean = false;
+  postForEdit: PhotoPostInterface | undefined;
+  mode: PhotoAction = PhotoAction.ADD;
+  addEditForm!: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<AddComponent>, private albumService: AlbumService) {}
+
+
+  constructor(private dialogRef: MatDialogRef<AddComponent>, private albumService: AlbumService, private _snackBar: MatSnackBar,
+    private dataService: DataService, @Inject(MAT_DIALOG_DATA) public data: {
+      photoToEdit: PhotoPostInterface
+    }, private formBuilder: FormBuilder, private notificationService: NotificationService) {
+    }
+
 
   // onImageSelected(event: any): void {
   //   const file = event.target.files[0];
@@ -28,16 +45,77 @@ export class AddComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.albumService.getAllAlbums().subscribe((albums) => {
-      this.albums = albums;
-    })
+    this.albumService.getAllAlbums().subscribe({
+      next: (albums) => {
+        this.albums = albums;
+    }, error: (err) => {
+      this.notificationService.raiseError("Albums when loading albums");
+      console.log(err);
+    }});
+
+    if(this.data !== null && this.data.photoToEdit !== null) {
+      this.postForEdit = this.data.photoToEdit;
+      console.log(this.postForEdit)
+
+      this.selectedImage = this.postForEdit.url;
+      this.mode = PhotoAction.EDIT;
+    }
+    this.createForm();
+
+  }
+
+  createForm() {
+    this.addEditForm = this.formBuilder.group({
+      title: [this.postForEdit?.title ?? '', Validators.required],
+      albumId: [this.postForEdit?.albumId ?? '', Validators.required],
+      photo: [this.postForEdit?.url ?? '', Validators.required]
+    });
   }
 
   submitForm(): void {
     // Handle form submission, including the selectedImage and description values
     // e.g., send them to a server, update the model, etc.
-    console.log('Selected Image:', this.selectedImage);
-    console.log('Title:', this.title);
+    // console.log('Selected Image:', this.imageUrl);
+    // console.log('Title:', this.title);
+    // console.log('Album:', this.selectedImage);
+    this.isLoadingImage = true;
+
+
+    const objectToSend = { 
+      albumId: this.photoAlbumId, 
+      title: this.photoTitle, 
+      url: this.photo, 
+      thumbnailUrl: this.photo };
+
+
+    if(this.mode == PhotoAction.EDIT) {
+      this.dataService.editPost(objectToSend, this.postForEdit!.id).subscribe({
+        next: (photo) => {          
+          this.sendObject(photo);
+          this.dialogRef.close(photo);
+        },
+        error: (err) => {
+          this.notificationService.raiseError(`The photo with id ${this.postForEdit?.id} was not found`);
+          console.log(err.message);
+          this.isLoadingImage = false;
+        }
+      });
+
+      // (result) => {
+      //   this.sendObject(result);
+      //   this.dialogRef.close(result);
+      //   console.log("in edit", result.id);
+      // }
+    } else if (this.mode == PhotoAction.ADD) {
+      this.dataService.addPost(objectToSend).subscribe(result => {
+        this.sendObject(result);
+        this.dialogRef.close();
+      });
+    }
+  }
+
+  sendObject(objectToSend: PhotoPostInterface) {
+    this.dataService.setNewPost(objectToSend);
   }
 
   dragOver: boolean = false;
@@ -54,7 +132,7 @@ export class AddComponent implements OnInit {
         reader.onload = (e: any) => {
           const imageSrc = e.target.result;
           // Handle the image source as needed (e.g., display the image, upload to a server, etc.)
-          console.log('Image source:', imageSrc);
+          // console.log('Image source:', imageSrc);
           this.selectedImage = imageSrc;
         };
         reader.readAsDataURL(file);
@@ -72,6 +150,49 @@ export class AddComponent implements OnInit {
     this.dragOver = false;
   }
 
+  clearImage(): void {
+    this.selectedImage = null;
+    this.addEditForm.get("photo")?.setValue(this.selectedImage);
+    console.log('clear');
+  }
 
+
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      this.readFile(file);
+    }
+  }
+
+  readFile(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.selectedImage = e.target.result;
+      this.addEditForm.get("photo")?.setValue(this.selectedImage);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onCancel() {
+    this.isLoadingImage = true;
+    this.dialogRef.close();
+  }
+
+
+  
+  
+  get photoTitle(): string  {
+    return this.addEditForm.get('title')!.value
+  }
+
+  get photoAlbumId(): number  {
+    return this.addEditForm.get('albumId')!.value
+  }
+
+  get photo(): string  {
+    return this.addEditForm.get('photo')!.value
+  }
+  
 
 }
