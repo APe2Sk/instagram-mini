@@ -8,20 +8,18 @@ import { PhotoAddEdit } from '../Interfaces/photo-add-edit';
   providedIn: 'root'
 })
 
-export class DataService {
+export class PhotoService {
 
   private url: string = 'https://jsonplaceholder.typicode.com/photos';
   private addSubject = new Subject<PhotoPostInterface>();
 
-
-
   constructor(private http: HttpClient) { }
 
-  getUserPosts(): Observable<PhotoPostInterface[]> {
+  getUserPhotos(): Observable<PhotoPostInterface[]> {
     return this.http.get<PhotoPostInterface[]>(this.url);
   }
 
-  getRangeUserPosts(start: number, limit: number): Observable<PhotoPostInterface[]> {
+  getInRangeUserPhotos(start: number, limit: number): Observable<PhotoPostInterface[]> {
     const params = new HttpParams()
       .set('_start', start)
       .set('_limit', limit);
@@ -29,7 +27,7 @@ export class DataService {
     return this.http.get<PhotoPostInterface[]>(this.url, { params });
   }
 
-  getPostsByTitle(title: string, start: number, limit: number): Observable<PhotoPostInterface[]> {
+  getPhotosByTitle(title: string, start: number, limit: number): Observable<PhotoPostInterface[]> {
     const params = new HttpParams()
       .set('title_like', title)
       .set('_start', start)
@@ -38,42 +36,28 @@ export class DataService {
     return this.http.get<PhotoPostInterface[]>(this.url, { params });
   }
 
-
-  getUserPostsById(id: number): Observable<PhotoPostInterface> {
+  getUserPhotosById(id: number): Observable<PhotoPostInterface> {
 
     return this.http.get<PhotoPostInterface>(`${this.url}/${id}`);
   }
 
-  deletePost(id: number): Observable<void>{
-    // console.log("deleted item with ID:", id);
+  deletePhoto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
 
-  addPost(newPost: PhotoAddEdit): Observable<PhotoPostInterface> {
-    return this.http.post<PhotoPostInterface>(this.url, newPost);
+  addPhoto(newPhoto: PhotoAddEdit): Observable<PhotoPostInterface> {
+    return this.http.post<PhotoPostInterface>(this.url, newPhoto);
   }
 
-  editPost(editedPost: PhotoAddEdit, id: number) : Observable<PhotoPostInterface> {
-    return this.http.put<PhotoPostInterface>(`${this.url}/${id}`, editedPost);
+  editPhoto(editedPhoto: PhotoAddEdit, id: number): Observable<PhotoPostInterface> {
+    return this.http.put<PhotoPostInterface>(`${this.url}/${id}`, editedPhoto);
   }
 
-  
-  setNewPost(object: PhotoPostInterface) {
+  setNewPhoto(object: PhotoPostInterface) {
     this.addSubject.next(object);
   }
 
-  getNewPost() {
+  getNewPhoto() {
     return this.addSubject.asObservable();
   }
-
-
-
-  // nov kod
-
-
-  // getData(startIndex: number, count: number, apiUrl: string) {
-  //   const url = `${apiUrl}?startIndex=${startIndex}&count=${count}`;
-  //   return this.http.get(url);
-  // }
-
 }

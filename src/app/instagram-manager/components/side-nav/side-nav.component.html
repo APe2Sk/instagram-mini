@@ -1,43 +1,40 @@
-<mat-drawer-container class="app-sidenav-container">
-
-    <mat-drawer 
-        #sideNav [mode]="isScreenSmall? 'over' : 'side'" [opened]="!isScreenSmall" 
-        class="example-form" >
-
-        <div class="container">
-            <div class="input-container">
+<mat-drawer-container class="app-container">
+    <mat-drawer #sideNav [mode]="isScreenSmall? 'over' : 'side'" [opened]="!isScreenSmall" 
+    class="sidenav-container" (keydown)="handleKeydown($event)">
+        <div>
+            <div class="inner-elements-sidenav-container">
                 <img src="../../../../assets/logo.png" alt="appLogo" class="app-logo" (click)="onHomeClick()">
 
             </div>
-            <!-- <input matInput [formControl]="searchControl" placeholder="Search"> -->
-            <div class="input-container">
-                <button class="ch" mat-flat-button style="width: 100%;" (click)="onHomeClick()">
+
+            <div class="inner-elements-sidenav-container">
+                <button class="button-element" mat-flat-button style="width: 100%;" (click)="onHomeClick()">
                     <mat-icon>home</mat-icon>
                     Home
                 </button>
             </div>
-            <div class="input-container">
-                <button class="ch" mat-flat-button style="width: 100%;" (click)="createNewPost()">
+
+            <div class="inner-elements-sidenav-container">
+                <button class="button-element" mat-flat-button style="width: 100%;" (click)="createNewPhoto()">
                     <mat-icon>add</mat-icon>
                     Create
                 </button>
             </div>
-            <div class="input-container">
+
+            <div class="inner-elements-sidenav-container">
                 <mat-form-field class="seach-field">
                     <mat-label>Search</mat-label>
-                    <input matInput [formControl]="searchControl" >
+                    <input matInput [formControl]="searchControl">
                 </mat-form-field>
             </div>
         </div>
-
     </mat-drawer>
 
 
-    <mat-drawer-content class="app-sidenav-content-container">
+    <mat-drawer-content class="content-container">
         <div class="app-toolbar">
             <app-toolbar (toggleSidenav)="sideNav.toggle()"></app-toolbar>
         </div>
-
 
         <div class="app-content">
             <router-outlet></router-outlet>

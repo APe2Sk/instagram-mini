@@ -6,10 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { DataService } from './Services/data.service';
+import { PhotoService } from './Services/photo.service';
 
 import { FlexLayoutModule } from '@angular/flex-layout'; 
-import { FilterService } from './Services/filter.service';
+import { SearchService } from './Services/search.service';
 import { NotificationService } from './Services/notification.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatSnackBarModule
   ],
-  providers: [DataService, FilterService, NotificationService],
+  providers: [PhotoService, SearchService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

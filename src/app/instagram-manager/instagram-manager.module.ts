@@ -9,40 +9,37 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { PhotoDetailsDialog } from './dialogs/photo-details-dialog/photo-details-dialog.component';
 
 
-import { FlexLayoutModule } from '@angular/flex-layout'; 
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { PhotoDetailsComponent } from './components/photo-detais/photo-details.component';
+import { PhotoDetailsComponent } from './components/photo-details/photo-details.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
-import { AddComponent } from './dialogs/add/add.component';
-import { DeleteComponent } from './dialogs/delete/delete.component';
-import {MatSelectModule} from '@angular/material/select';
-import { DataService } from '../Services/data.service';
-import {
-  MatSnackBar,
-  MatSnackBarModule,
-} from '@angular/material/snack-bar';
+import { AddEditPhotoDialog } from './dialogs/add-edit-photo-dialog/add-edit-photo-dialog.component';
+import { DeletePhotoDialog } from './dialogs/delete-photo-dialog/delete-photo-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [
-  {path: '', component: InstagramAppComponent,
+  {
+    path: '', component: InstagramAppComponent,
     children: [
-      {path: '', component: MainContentComponent},
+      { path: '', component: MainContentComponent },
       { path: ':id', component: PhotoDetailsComponent },
     ]
   },
-  {path: '**', redirectTo: ''}
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
@@ -53,13 +50,13 @@ const routes: Routes = [
     MainContentComponent,
     PhotoDetailsComponent,
     PhotoDetailsDialog,
-    AddComponent,
-    DeleteComponent,
+    AddEditPhotoDialog,
+    DeletePhotoDialog,
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    RouterModule.forChild(routes),  
+    RouterModule.forChild(routes),
     ReactiveFormsModule,
     MatSidenavModule,
     MatGridListModule,
@@ -67,7 +64,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
-    MatDialogModule, 
+    MatDialogModule,
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,

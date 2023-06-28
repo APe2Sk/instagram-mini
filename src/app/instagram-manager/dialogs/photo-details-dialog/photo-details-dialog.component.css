@@ -1,14 +1,3 @@
-
-
-
-/* p {
-    font-size: 1.2rem;
-    @media (max-width: 600px) {
-    font-size: 0.8rem;
-
-    }
-} */
-
 .dialog-upper-part {
   display: flex;
   justify-content: space-between;
@@ -19,7 +8,6 @@
 .close-button {
   position: end;
 }
-
 
 .details-part {
   display: flex;
@@ -33,18 +21,16 @@
   cursor: pointer;
 }
 
-.example-card {
-  /* max-width: 400px; */
+.photo-details-dialog {
   border: none;
   box-shadow: none;
   padding: 0;
 }
 
-.example-header-image {
+.user-logo {
   background-image: url('\src\assets\avatar.png');
   background-size: cover;
 }
-
 
 .card-image {
   margin-top: 15px;

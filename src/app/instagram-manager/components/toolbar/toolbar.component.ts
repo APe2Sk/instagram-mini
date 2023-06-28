@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
-import { FilterService } from 'src/app/Services/filter.service';
+import { SearchService } from 'src/app/Services/search.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -15,12 +15,12 @@ export class ToolbarComponent implements OnInit {
 
 
   @Output() toggleSidenav = new EventEmitter<void>();
-  constructor(private router: Router, private filterService: FilterService) { }
+  constructor(private router: Router, private searchService: SearchService) { }
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
       console.log(value);
-      this.filterService.searchTitle(value);    
+      this.searchService.searchTitle(value);
     });
   }
 

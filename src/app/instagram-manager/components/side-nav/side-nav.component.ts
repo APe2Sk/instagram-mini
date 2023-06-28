@@ -1,14 +1,12 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-import { FilterService } from 'src/app/Services/filter.service';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { SearchService } from 'src/app/Services/search.service';
 import { Router } from '@angular/router';
-import { AddComponent } from '../../dialogs/add/add.component';
+import { AddEditPhotoDialog } from '../../dialogs/add-edit-photo-dialog/add-edit-photo-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { state } from '@angular/animations';
+import { MatDrawer } from '@angular/material/sidenav';
 
 const SMALL_WIDTH_BEARKPOINT = 720;
 
@@ -19,13 +17,11 @@ const SMALL_WIDTH_BEARKPOINT = 720;
 })
 export class SideNavComponent implements OnInit {
 
-  // //new
   searchControl: FormControl = new FormControl('');
   public isScreenSmall: boolean = false;
+  @ViewChild('sideNav') sideNav!: MatDrawer;
 
-
-  constructor(private filterService: FilterService, private router: Router, public dialog: MatDialog, public breakpointObserver: BreakpointObserver) {
-  }
+  constructor(private searchService: SearchService, private router: Router, public dialog: MatDialog, public breakpointObserver: BreakpointObserver) { }
 
   ngOnInit() {
 
@@ -37,15 +33,33 @@ export class SideNavComponent implements OnInit {
 
     this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
       console.log(value);
-      this.filterService.searchTitle(value);    
+      this.searchService.searchTitle(value);
     });
   }
 
   onHomeClick() {
     this.router.navigate(['']);
+    
+    this.closeSidenav();
   }
 
-  createNewPost() {
-    this.dialog.open(AddComponent);
+  createNewPhoto() {
+    this.dialog.open(AddEditPhotoDialog);
+    
+    this.closeSidenav();
+  }
+  
+  closeSidenav() {
+    if(this.isScreenSmall) {
+      this.sideNav.close();
+    }
+  }
+  
+  handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.sideNav.opened = true;
+    }
   }
 }
