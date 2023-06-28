@@ -1,27 +1,21 @@
-import { ChangeDetectionStrategy, Component, Directive, HostListener, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhotoPostInterface } from 'src/app/Interfaces/photo-posts-interface';
 import { DataService } from 'src/app/Services/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
-import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+import { PhotoDetailsDialog } from '../../dialogs/photo-details-dialog/photo-details-dialog.component';
 import { FilterService } from 'src/app/Services/filter.service';
-import { Observable, Subscription, switchMap } from 'rxjs';
-import { Router } from '@angular/router';
+import { Subscription, switchMap } from 'rxjs';
 import { Location } from '@angular/common';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DialogActionResult } from 'src/app/Interfaces/dialog-action-result';
 import { PhotoAction } from '../../enums/photo-action-enum';
-import { PhotoAddEdit } from 'src/app/Interfaces/photo-add-edit';
-
 
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.css']
 })
-export class MainContentComponent implements OnInit {
 
+export class MainContentComponent implements OnInit {
 
   userPosts: PhotoPostInterface[] = [];
   isHovered: boolean = false;
@@ -32,10 +26,8 @@ export class MainContentComponent implements OnInit {
   receivedObject: PhotoPostInterface | undefined;
   private subscription!: Subscription;
 
-
   constructor(private dataService: DataService, public dialog: MatDialog, private filterService: FilterService,
     private location: Location) {
-
   }
 
   ngOnInit(): void {
@@ -60,21 +52,13 @@ export class MainContentComponent implements OnInit {
         this.userPosts.unshift(object);
       }
 
-
-      // // // console.log("in main Title:", this.receivedObject.title);
-      // // // console.log("in main albumId:", this.receivedObject.albumId);
-      // // // console.log("in main image: ", this.receivedObject.thumbnailUrl);
-      // // // console.log("in main id: ", this.receivedObject.id);
-
-      console.log(object);
-      // console.log(this.userPosts[5000].id);
+      // console.log(object);
     });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 
   getData(): void {
     this.isLoading = true;
@@ -86,11 +70,6 @@ export class MainContentComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
-
-  // onClickElement(cardId: number): void {
-  //   console.log("Clciked element", cardId);
-  // }
 
   onMouseEnter() {
     this.isHovered = true;
@@ -106,12 +85,11 @@ export class MainContentComponent implements OnInit {
     if (index !== -1) {
       return this.userPosts[index];
     }
-
     return undefined;
   }
 
   openDialog(cardId: number) {
-    const dialogRef = this.dialog.open(DialogComponent, { data: { newCardsArr: this.findPhotoById(cardId) } });
+    const dialogRef = this.dialog.open(PhotoDetailsDialog, { data: { newCardsArr: this.findPhotoById(cardId) } });
     console.log(cardId);
     this.location.replaceState(`photos/${cardId}`)
 
@@ -146,16 +124,4 @@ export class MainContentComponent implements OnInit {
     }
   }
 
-
-
-  //new
-  // applyFilter(filterText: string) {
-  //   if (filterText) {
-  //     this.filteredItems = this.userPosts.filter(userPost =>
-  //       userPost.title.toLowerCase().includes(filterText.toLowerCase())
-  //     );
-  //   } else {
-  //     this.filteredItems = this.userPosts.slice(); // Reset to all items
-  //   }
 }
-

@@ -5,8 +5,12 @@ import { FilterService } from 'src/app/Services/filter.service';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import { AddComponent } from '../add/add.component';
+import { AddComponent } from '../../dialogs/add/add.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { state } from '@angular/animations';
+
+const SMALL_WIDTH_BEARKPOINT = 720;
 
 @Component({
   selector: 'app-side-nav',
@@ -17,12 +21,20 @@ export class SideNavComponent implements OnInit {
 
   // //new
   searchControl: FormControl = new FormControl('');
+  public isScreenSmall: boolean = false;
 
 
-  constructor(private filterService: FilterService, private router: Router, public dialog: MatDialog) {
+  constructor(private filterService: FilterService, private router: Router, public dialog: MatDialog, public breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit() {
+
+    this.breakpointObserver
+      .observe([`(max-width: ${SMALL_WIDTH_BEARKPOINT}px)`])
+      .subscribe((state: BreakpointState) => {
+        this.isScreenSmall = state.matches;
+      })
+
     this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
       console.log(value);
       this.filterService.searchTitle(value);    

@@ -6,7 +6,7 @@ import { InstagramAppComponent } from './instagram-app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { PhotoDetailsDialog } from './dialogs/photo-details-dialog/photo-details-dialog.component';
 
 
 import { FlexLayoutModule } from '@angular/flex-layout'; 
@@ -26,9 +26,8 @@ import { PhotoDetailsComponent } from './components/photo-detais/photo-details.c
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
-import { AddComponent } from './components/add/add.component';
-import { EditComponent } from './components/edit/edit.component';
-import { DeleteComponent } from './components/delete/delete.component';
+import { AddComponent } from './dialogs/add/add.component';
+import { DeleteComponent } from './dialogs/delete/delete.component';
 import {MatSelectModule} from '@angular/material/select';
 import { DataService } from '../Services/data.service';
 import {
@@ -53,9 +52,8 @@ const routes: Routes = [
     SideNavComponent,
     MainContentComponent,
     PhotoDetailsComponent,
-    DialogComponent,
+    PhotoDetailsDialog,
     AddComponent,
-    EditComponent,
     DeleteComponent,
   ],
   imports: [

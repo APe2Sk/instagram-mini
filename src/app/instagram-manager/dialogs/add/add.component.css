@@ -2,36 +2,41 @@
     max-width: 40%;
 }
 
-.upload-dialog {
-    display: flex;
-    flex-direction: row;
-}
+/* .upload-dialog {
+  @media (max-width: 700px) {
+    height: 70vh;
+  }
+} */
 
 .details-container {
     margin-left: 10px;
+    width: 50%;
+    padding: 20px;
+    @media (max-width: 700px) {
+      width: 80%;
+    }
 }
-
-/* .image-upload-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.upload-dialog{
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
-} */
 
 .dd {
     display: flex;
     flex-direction: row;
+    height: 100%;
+    width: 100%;
+
+    @media (max-width: 700px) {
+      display: block;
+
+      height: 100%;
+      width: 100%;
+  }
 }
 
-.upload-dialog {
+.forms-div {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    justify-content: center;
   }
   
   .drop-area {
@@ -39,14 +44,20 @@
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    width: 600px;
-    height: 600px;
+    width: 70vh;
+    height: 70vh;
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    @media (max-width: 700px) {
+      width: 100%;
+      height: 32vh;
+
+    }
   }
   
   .drop-area p {
@@ -64,13 +75,6 @@
     transform: translate(-50%, -50%);
   }
   
-  .details-container {
-    width: 300px;
-    padding: 20px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-around; */
-  }
   
   .details {
     margin-top: 20px;

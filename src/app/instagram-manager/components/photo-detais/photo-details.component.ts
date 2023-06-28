@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PhotoPostInterface } from 'src/app/Interfaces/photo-posts-interface';
 import { DataService } from 'src/app/Services/data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+import { PhotoDetailsDialog } from '../../dialogs/photo-details-dialog/photo-details-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { FilterService } from 'src/app/Services/filter.service';
@@ -39,7 +39,4 @@ export class PhotoDetailsComponent implements OnInit {
             });
         }
     }
-
-
 }
-

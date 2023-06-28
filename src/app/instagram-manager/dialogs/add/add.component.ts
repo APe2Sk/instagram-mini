@@ -132,10 +132,15 @@ export class AddComponent implements OnInit {
         reader.onload = (e: any) => {
           const imageSrc = e.target.result;
           // Handle the image source as needed (e.g., display the image, upload to a server, etc.)
-          // console.log('Image source:', imageSrc);
+          console.log('Image source:', imageSrc);
           this.selectedImage = imageSrc;
+
+          //ova go dodadov
+          this.readFile(file);
+
         };
         reader.readAsDataURL(file);
+
       }
     }
   }
@@ -169,6 +174,7 @@ export class AddComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.selectedImage = e.target.result;
+      console.log("in read file", this.selectedImage);
       this.addEditForm.get("photo")?.setValue(this.selectedImage);
     };
     reader.readAsDataURL(file);

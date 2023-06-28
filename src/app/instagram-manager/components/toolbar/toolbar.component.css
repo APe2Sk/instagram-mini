@@ -1,0 +1,30 @@
+.toolbar-small-screen {
+
+    display: none;
+    background-color: rgb(247, 247, 247);
+
+    @media (max-width: 720px) {
+        max-height: 20%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    align-items: center;
+    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
+
+
+}
+
+.app-logo {
+    max-height: 20px;
+    cursor: pointer;
+}
+
+/* .input-container {
+    margin: 20px 20px;
+} */
+
+.seach-field {
+    max-width: 90%;
+    width: 90%;
+}
