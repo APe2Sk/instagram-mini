@@ -1,0 +1,35 @@
+<mat-spinner *ngIf="isLoadingImage"></mat-spinner>
+
+<div class="photo-details-dialog-container" *ngIf="!isLoadingImage">
+
+  <mat-card class="photo-details-dialog">
+    <mat-card-header>
+      <div mat-card-avatar class="user-logo"></div>
+      <mat-card-title>{{userAlbum.user.username}}</mat-card-title>
+      <mat-card-subtitle>{{userAlbum.title}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <div class="image-container">
+      <img class="card-image" mat-card-image src={{userPhotoPost.url}} alt="">
+
+    </div>
+    <mat-card-content class="details-container">
+      <p class="photo-title">
+        {{userPhotoPost.title}}
+      </p>
+      <div class="options-button">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon class="more-options">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openEditDialog()">Edit</button>
+
+          <button mat-button color="warn" (click)="openDeleteConfirmationDialog()">Delete</button>
+        </mat-menu>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

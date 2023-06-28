@@ -1,28 +1,28 @@
-<div class="ss"  (scroll)="onScroll($event)">
-    
-<div class="main-content-container">
-    <mat-card cols="2" rowHeight="2:1" *ngFor="let post of userPosts" class="card-content" 
-        (click)="openDialog(post.id)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
-        <img mat-card-image [src]="post.thumbnailUrl" class="image-content">
+<div class="scroll-container" (scroll)="onScroll($event)">
 
-        <mat-card-content class="individual-content-container">
-            <p>
-                {{post.title}}
-            </p>
-        </mat-card-content>
+    <div class="main-content-container" fxLayout.xs="column">
+        <mat-card cols="2" rowHeight="2:1" *ngFor="let photo of userPhotos" class="card-content"
+            (click)="openDialog(photo.id)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+            <img mat-card-image [src]="photo.thumbnailUrl" class="image">
 
-    </mat-card>
+            <mat-card-content class="card-description">
+                <p>
+                    {{photo.title}}
+                </p>
+            </mat-card-content>
 
-
-    <div class="spinner">
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
-    </div>
+        </mat-card>
 
 
-    <div *ngIf="userPosts.length === 0">
+        <div class="spinner">
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+        </div>
+
+
+        <div *ngIf="userPhotos.length === 0 && !isLoading">
             No content
+        </div>
     </div>
-</div>
 
 
 </div>

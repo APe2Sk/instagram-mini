@@ -1,0 +1,56 @@
+<mat-spinner *ngIf="isLoadingImage"></mat-spinner>
+
+
+<form [formGroup]="addEditForm" (ngSubmit)="submitForm()" class="upload-dialog" *ngIf="!isLoadingImage">
+
+  <div class="upload-from-dialog">
+    <div class="upload-data-container">
+
+      <!-- Part 1.1 of dialog- img upload -->
+      <div class="drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+        <div class="add-image">
+          <p *ngIf="selectedImage === null">Drag and drop your image here</p>
+          <label class="upload-image-label">
+            <input *ngIf="selectedImage === null" type="file" accept="image/*" (change)="onFileSelected($event)">
+          </label>
+        </div>
+
+        <img *ngIf="selectedImage" [src]="selectedImage" alt="Dropped Image" required>
+        <div class="button-container">
+          <button mat-icon-button color="warn" *ngIf="selectedImage" (click)="clearImage()" class="clear-button">
+            <mat-icon class="clear-icon">clear</mat-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <mat-divider [vertical]="true"></mat-divider>
+
+      <!-- Part 1.2 of dialog- img title and album -->
+      <div class="upload-photodetails-container">
+        <mat-form-field class="title-field">
+          <mat-label for="title">Title:</mat-label>
+          <textarea formControlName="title" rows="1" maxR matInput id="title" name="title"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="album-field">
+          <mat-label>Album</mat-label>
+          <mat-select formControlName="albumId">
+            <mat-option *ngIf="!albums" disabled>No albums available</mat-option>
+            <mat-option *ngFor="let album of albums" [value]="album.id">
+              {{album.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <!-- Part 2 of dialog- img submit button -->
+    <div class="upload-action-buttons-conatiner">
+      <button type="submit" [disabled]="!addEditForm.valid" mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+
+</form>

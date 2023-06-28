@@ -15,9 +15,9 @@ export class AlbumService {
 
   getAlbumById(id: number): Observable<AlbumExtendedInterface> {
     const params = new HttpParams()
-    .set('_expand', "user");
+      .set('_expand', "user");
 
-    return this.http.get<AlbumExtendedInterface>(`${this.url}/${id}`, {params});
+    return this.http.get<AlbumExtendedInterface>(`${this.url}/${id}`, { params });
   }
 
   getAllAlbums(): Observable<AlbumInterface[]> {
