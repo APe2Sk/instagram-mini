@@ -38,6 +38,7 @@ export class MainContentComponent implements OnInit {
         return this.photoService.getPhotosByTitle(searchTitle, this.startLoadData, this.limitLoadData);
       })).subscribe((userPhotos) => {
         this.userPhotos = userPhotos;
+        this.startLoadData += this.limitLoadData;
       });
 
     this.photoService.getNewPhoto().subscribe((object) => {
